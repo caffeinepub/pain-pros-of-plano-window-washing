@@ -1,0 +1,33 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update frontend admin quotes UI to match new backend quote storage while keeping admin-only access",
+  "requirements": [
+    {
+      "id": "REQ-43",
+      "summary": "Adapt frontend admin quotes hook and View Quotes page to the updated backend quote storage response while preserving admin-only protection.",
+      "acceptanceCriteria": [
+        "The frontend admin quotes query (useAdminQuotes) successfully loads the updated backend getAllQuoteRequests response.",
+        "The View Quotes table renders all entries without runtime/type errors and includes a stable row key per entry.",
+        "Non-admin visitors cannot access quote data: attempts to call the admin quotes endpoint still fail with an admin-only authorization error, and the UI remains protected by AdminAuthGate."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/backend.d.ts",
+          "operation": "modify",
+          "description": "Update frontend type definitions for the new backend getAllQuoteRequests return shape (introduce a stable per-entry identifier and any new/renamed fields required by the updated quote storage) so hooks/pages compile without type mismatches."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminQuotes.ts",
+          "operation": "modify",
+          "description": "Update useAdminQuotes to query the updated getAllQuoteRequests response type and return the new entry list shape for the UI. Use the authorization component’s role-based access assumptions (admin-only fetch) via existing useAdminAuth gating; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ViewQuotesPage.tsx",
+          "operation": "modify",
+          "description": "Update the View Quotes table rendering to match the new entries structure and use the stable per-entry identifier as the TableRow key (instead of principal+index). Continue wrapping the page with AdminAuthGate to keep it admin-only and ensure admin-only authorization failures are still surfaced as errors; verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

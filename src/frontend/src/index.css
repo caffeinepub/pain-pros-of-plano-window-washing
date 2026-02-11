@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        /* Teal/Cyan palette for window washing (clean, fresh, water-inspired) */
+        --background: 0.99 0.005 200;
+        --foreground: 0.2 0.02 220;
+        --card: 1 0 0;
+        --card-foreground: 0.2 0.02 220;
+        --popover: 1 0 0;
+        --popover-foreground: 0.2 0.02 220;
+        /* Primary: Deep teal */
+        --primary: 0.45 0.12 195;
+        --primary-foreground: 0.99 0.005 200;
+        /* Secondary: Light cyan */
+        --secondary: 0.92 0.04 200;
+        --secondary-foreground: 0.25 0.05 200;
+        --muted: 0.95 0.01 220;
+        --muted-foreground: 0.5 0.02 220;
+        /* Accent: Bright cyan */
+        --accent: 0.75 0.15 195;
+        --accent-foreground: 0.99 0.005 200;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.99 0.005 200;
+        --border: 0.88 0.02 220;
+        --input: 0.88 0.02 220;
+        --ring: 0.45 0.12 195;
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+    }
+
+    .dark {
+        --background: 0.15 0.02 220;
+        --foreground: 0.95 0.01 200;
+        --card: 0.2 0.02 220;
+        --card-foreground: 0.95 0.01 200;
+        --popover: 0.18 0.02 220;
+        --popover-foreground: 0.95 0.01 200;
+        /* Primary: Bright teal in dark mode */
+        --primary: 0.65 0.15 195;
+        --primary-foreground: 0.15 0.02 220;
+        --secondary: 0.25 0.04 200;
+        --secondary-foreground: 0.92 0.02 200;
+        --muted: 0.25 0.02 220;
+        --muted-foreground: 0.65 0.02 220;
+        --accent: 0.55 0.14 195;
+        --accent-foreground: 0.95 0.01 200;
+        --destructive: 0.65 0.22 25;
+        --destructive-foreground: 0.95 0.01 200;
+        --border: 0.3 0.02 220;
+        --input: 0.3 0.02 220;
+        --ring: 0.65 0.15 195;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold tracking-tight;
+    }
+
+    h1 {
+        @apply text-4xl md:text-5xl lg:text-6xl;
+    }
+
+    h2 {
+        @apply text-3xl md:text-4xl lg:text-5xl;
+    }
+
+    h3 {
+        @apply text-2xl md:text-3xl;
+    }
+
+    h4 {
+        @apply text-xl md:text-2xl;
+    }
+}
+
+@layer components {
+    .container-custom {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .section-padding {
+        @apply py-12 md:py-16 lg:py-24;
+    }
+}

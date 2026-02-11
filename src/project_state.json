@@ -1,0 +1,470 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 41,
+  "summary": "Website for Pain Pros of Plano Window Washing with a homepage, quote request form, and business contact info; remove the Before/After photo area and instead add a section highlighting other services/jobs offered (e.g., gutter cleaning, solar panel cleaning, power washing, leaf raking, and other small duties). Quote submissions should be allowed for the public (no login required), while quote viewing remains admin-only. Quote submissions should be emailed to paneprosnplano@gmail.com (currently blocked by platform email capability). Add an admin login and a private \"View Quotes\" page so only the owner can view submitted quote requests in the site UI.",
+  "architectural_notes": [
+    "Remove/hide the Before/After gallery UI and add a services/other-jobs section (gutter cleaning, solar panel cleaning, power washing, leaf raking, and other small duties) in its place.",
+    "Use business-provided/service photos displayed alongside each service item (avoid external scraping/hotlinking; bundle locally as static assets if needed).",
+    "Logo should be provided by the business and bundled locally as a static asset (no hotlinking); display in header/nav (and optionally footer) with appropriate alt text.",
+    "Rebrand displayed business name text from \"Pain Pros of Plano\" to \"Pane Pros of Plano\" wherever it appears in site copy/headers.",
+    "Quotes are currently stored but not easily accessible in the UI; add a private admin-only \"View Quotes\" page behind authentication (e.g., Internet Identity) so only the owner can view submissions.",
+    "Publishing should use a custom domain (or platform-supported vanity URL) so the public URL does not include \"caffeine.xyz\".",
+    "Change quote submission authorization so public/anonymous users can create quote requests, while preserving admin-only access for viewing/listing quotes."
+  ],
+  "known_issues": [
+    "Build/deploy failed with a configuration problem message; needs investigation before changes can be deployed.",
+    "Quote-request-to-email functionality is requested but blocked due to platform/account email sending being disabled.",
+    "Quote request submission is currently blocked for public users because the backend requires authenticated #user permission, causing an Unauthorized error on the quote form."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-cohesive-visual-theme-for-the-pain-pros-of-plano-window-washing-site-and-apply-it-consistently-across-all-pages-colors-typography-spacing-button-styles-and-section-layout-avoid-a-blue-purple-primary-palette",
+      "title": "Create a cohesive visual theme for the Pain Pros of Plano Window Washing site and apply it consistently across all pages (colors, typography, spacing, button styles, and section layout). Avoid a blue/purple primary palette.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-homepage-for-pain-pros-of-plano-window-washing-that-prominently-displays-the-phone-number-214-284-1305-and-provides-clear-navigation-to-the-quote-request-form-and-the-before-after-photo-album",
+      "title": "Build a homepage for “Pain Pros of Plano Window Washing” that prominently displays the phone number 214-284-1305 and provides clear navigation to the Quote Request form and the Before/After photo album.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-quote-request-form-that-collects-first-name-last-name-zip-code-address-number-of-windows-in-the-house-and-an-optional-note-validate-inputs-on-the-client-and-submit-the-request-to-the-backend-for-storage",
+      "title": "Implement a Quote Request form that collects: first name, last name, ZIP code, address, number of windows in the house, and an optional note. Validate inputs on the client and submit the request to the backend for storage.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-before-after-photo-album-page-that-displays-multiple-dirty-to-clean-window-examples-as-paired-images-before-vs-after-in-a-responsive-gallery-layout",
+      "title": "Create a Before/After photo album page that displays multiple dirty-to-clean window examples as paired images (Before vs After) in a responsive gallery layout.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-do-not-implement-automated-image-scraping-use-only-bundled-images-that-are-either-user-provided-or-generated-royalty-free-and-include-a-simple-image-credits-section-if-any-external-royalty-free-sources-are-used",
+      "title": "Do not implement automated image scraping. Use only bundled images that are either user-provided or generated/royalty-free, and include a simple “Image Credits” section if any external royalty-free sources are used.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-required-gallery-images-as-static-assets-under-frontend-public-assets-generated-and-render-them-in-the-before-after-album",
+      "title": "Add the required gallery images as static assets under frontend/public/assets/generated and render them in the Before/After album.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-before-after-gallery-images-with-real-non-ai-before-after-photo-pairs-where-each-pair-is-the-same-exact-window-photographed-before-cleaning-and-after-cleaning-and-ensure-all-images-are-bundled-as-static-assets-no-hotlinking-under-frontend-public-assets-generated-using-the-existing-filenames-referenced-by-the-gallery-page",
+      "title": "Replace the Before/After Gallery images with real (non-AI) before/after photo pairs where each pair is the same exact window photographed before cleaning and after cleaning, and ensure all images are bundled as static assets (no hotlinking) under frontend/public/assets/generated using the existing filenames referenced by the gallery page.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-image-credits-section-on-the-before-after-gallery-page-that-lists-the-source-owner-and-license-usage-rights-for-each-externally-sourced-internet-google-found-before-after-photo-pair-used-or-explicitly-states-that-the-images-were-provided-by-the-business-if-user-provided",
+      "title": "Add an Image Credits section on the Before & After Gallery page that lists the source/owner and license/usage rights for each externally sourced (internet/Google-found) before/after photo pair used, or explicitly states that the images were provided by the business if user-provided.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-site-content-to-list-the-company-owner-as-rylan-myers-at-minimum-in-the-footer-company-info",
+      "title": "Update site content to list the company owner as Rylan Myers (at minimum in the footer company info).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-before-after-gallery-to-use-the-newly-uploaded-photos-img-4981-jpeg-img-4984-jpeg-img-4983-jpeg-as-the-displayed-before-after-images-keeping-all-images-bundled-locally-under-frontend-public-assets-generated-no-hotlinking-use-the-existing-gallery-asset-filenames-currently-referenced-by-the-gallery-page",
+      "title": "Update the Before & After Gallery to use the newly uploaded photos (IMG_4981.jpeg, IMG_4984.jpeg, IMG_4983.jpeg) as the displayed before/after images, keeping all images bundled locally under frontend/public/assets/generated (no hotlinking). Use the existing gallery asset filenames currently referenced by the gallery page.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-if-the-uploaded-photos-do-not-provide-enough-true-matched-before-after-pairs-to-support-all-existing-gallery-entries-reduce-the-number-of-gallery-entries-shown-to-only-those-entries-that-have-a-real-matched-before-photo-and-after-photo-available-from-the-uploaded-set-and-update-the-image-credits-section-accordingly-so-it-only-lists-credits-for-the-entries-that-are-actually-displayed",
+      "title": "If the uploaded photos do not provide enough true matched before/after pairs to support all existing gallery entries, reduce the number of gallery entries shown to only those entries that have a real matched before photo and after photo available from the uploaded set, and update the Image Credits section accordingly so it only lists credits for the entries that are actually displayed.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-image-credits-section-on-the-before-after-gallery-page-to-explicitly-state-that-the-currently-displayed-photos-were-provided-by-the-business-user-provided-uploads-and-remove-any-credits-that-no-longer-correspond-to-displayed-image-pairs",
+      "title": "Update the Image Credits section on the Before & After Gallery page to explicitly state that the currently displayed photos were provided by the business (user-provided uploads), and remove any credits that no longer correspond to displayed image pairs.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-before-after-gallery-page-to-display-exactly-one-before-after-entry-using-the-existing-asset-paths-already-referenced-by-the-gallery-code-and-replace-the-underlying-static-assets-with-the-newly-uploaded-photos-img-4981-2-jpeg-and-img-4984-2-jpeg-so-the-page-renders-those-images-locally-no-hotlinking",
+      "title": "Update the Before & After Gallery page to display exactly one before/after entry, using the existing asset paths already referenced by the gallery code, and replace the underlying static assets with the newly uploaded photos (IMG_4981-2.jpeg and IMG_4984-2.jpeg) so the page renders those images locally (no hotlinking).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-image-credits-section-on-the-before-after-gallery-page-so-it-only-includes-one-credits-entry-corresponding-to-the-single-displayed-pair-explicitly-stating-the-photos-were-provided-by-the-business-user-provided-uploads",
+      "title": "Update the Image Credits section on the Before & After Gallery page so it only includes one credits entry corresponding to the single displayed pair, explicitly stating the photos were provided by the business (user-provided uploads).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-the-business-email-address-paneprosnplano-gmail-com-on-the-website-in-user-facing-content-at-minimum-in-the-footer-company-info-and-on-the-quote-request-page-using-clear-readable-text",
+      "title": "Display the business email address paneprosnplano@gmail.com on the website in user-facing content (at minimum in the footer company info and on the Quote Request page), using clear, readable text.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-address-the-build-deploy-configuration-error-so-the-project-can-successfully-build-and-deploy-after-these-changes",
+      "title": "Address the build/deploy configuration error so the project can successfully build and deploy after these changes.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-before-after-gallery-area-from-the-home-page-and-replace-it-with-an-other-jobs-services-we-do-section-that-lists-gutter-cleaning-solar-panel-cleaning-power-washing-raking-leaves-and-other-small-duties-that-most-companies-wouldn-t",
+      "title": "Remove the “Before & After” (gallery) area from the Home page and replace it with an “Other Jobs / Services We Do” section that lists: gutter cleaning, solar panel cleaning, power washing, raking leaves, and other small duties that most companies wouldn’t.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-site-navigation-so-users-are-no-longer-directed-to-a-before-after-gallery-page-replace-the-existing-before-after-navigation-item-with-an-other-jobs-or-other-services-destination-that-shows-the-new-services-content-or-remove-the-gallery-navigation-entirely-if-no-destination-is-added",
+      "title": "Update site navigation so users are no longer directed to a Before & After gallery page. Replace the existing “Before & After” navigation item with an “Other Jobs” (or “Other Services”) destination that shows the new services content, or remove the gallery navigation entirely if no destination is added.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-footer-services-list-to-include-the-additional-services-gutter-cleaning-solar-panel-cleaning-power-washing-and-raking-leaves-in-english",
+      "title": "Update the footer “Services” list to include the additional services: gutter cleaning, solar panel cleaning, power washing, and raking leaves (in English).",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-other-jobs-we-do-section-to-include-a-short-readable-description-under-each-listed-service-gutter-cleaning-solar-panel-cleaning-power-washing-raking-leaves-so-the-section-feels-more-complete-while-keeping-all-user-facing-text-in-english",
+      "title": "Update the Home page “Other Jobs We Do” section to include a short, readable description under each listed service (Gutter Cleaning, Solar Panel Cleaning, Power Washing, Raking Leaves) so the section feels more complete, while keeping all user-facing text in English.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-locally-bundled-service-photos-no-hotlinking-as-static-assets-under-frontend-public-assets-generated-for-each-service-shown-in-the-other-jobs-we-do-section-on-the-home-page-and-in-the-service-grid-on-the-other-jobs-other-services-page",
+      "title": "Add locally bundled service photos (no hotlinking) as static assets under frontend/public/assets/generated for each service shown in the \"Other Jobs We Do\" section on the Home page and in the service grid on the \"Other Jobs\" (Other Services) page.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-ui-so-each-service-card-shows-its-corresponding-photo-next-to-the-service-name-content-e-g-as-a-thumbnail-image-aligned-left-right-or-as-a-card-header-image-on-both-frontend-src-pages-homepage-tsx-4-services-and-frontend-src-pages-otherjobspage-tsx-5-services-including-other-small-duties-use-clear-english-alt-text-for-each-image",
+      "title": "Update the UI so each service card shows its corresponding photo next to the service name/content (e.g., as a thumbnail image aligned left/right or as a card header image) on both frontend/src/pages/HomePage.tsx (4 services) and frontend/src/pages/OtherJobsPage.tsx (5 services, including \"Other Small Duties\"). Use clear English alt text for each image.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-locally-bundled-logo-image-under-frontend-public-assets-generated-and-use-it-as-the-site-logo-no-hotlinking",
+      "title": "Add a locally bundled logo image under frontend/public/assets/generated and use it as the site logo (no hotlinking).",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-header-brand-area-in-frontend-src-components-siteheader-tsx-to-display-the-logo-image-next-to-the-text-pain-pros-of-plano-keeping-the-existing-navigation-behavior-clicking-the-brand-still-navigates-to-home",
+      "title": "Update the header brand area in frontend/src/components/SiteHeader.tsx to display the logo image next to the text “Pain Pros of Plano”, keeping the existing navigation behavior (clicking the brand still navigates to Home).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-favicon-using-the-same-logo-asset-or-a-favicon-specific-variant-by-updating-frontend-index-html-to-include-a-link-rel-icon-pointing-to-a-locally-bundled-file-under-assets-generated",
+      "title": "Add a favicon using the same logo asset (or a favicon-specific variant) by updating frontend/index.html to include a <link rel=\"icon\" ...> pointing to a locally bundled file under /assets/generated.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-unpublish-the-selected-header-logo-image-element-by-removing-it-from-the-siteheader-brand-button-so-the-img-is-no-longer-rendered-while-keeping-the-brand-button-clickable-and-keeping-the-brand-text-visible",
+      "title": "Unpublish the selected header logo image element by removing it from the SiteHeader brand button so the <img> is no longer rendered, while keeping the brand button clickable and keeping the brand text visible.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-only-the-selected-header-brand-text-element-at-xpath-html-1-body-1-div-1-div-1-header-1-div-1-div-1-button-1-span-1-so-it-displays-pane-pros-of-plano-instead-of-pain-pros-of-plano",
+      "title": "Update ONLY the selected header brand text element at XPath /html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/button[1]/span[1] so it displays “Pane Pros of Plano” instead of “Pain Pros of Plano”.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-only-the-selected-heading-element-at-xpath-html-1-body-1-div-1-div-1-main-1-div-1-section-2-div-1-div-1-h2-1-features-section-heading-on-the-home-page-so-the-text-reads-why-choose-pane-pros-instead-of-why-choose-pain-pros",
+      "title": "Update ONLY the selected heading element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/section[2]/div[1]/div[1]/h2[1] (Features section heading on the Home page) so the text reads “Why Choose Pane Pros?” instead of “Why Choose Pain Pros?”",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-every-remaining-user-facing-occurrence-of-the-business-name-text-pain-pros-of-plano-with-pane-pros-of-plano-across-the-site-including-page-copy-footer-text-and-the-browser-tab-title",
+      "title": "Replace every remaining user-facing occurrence of the business name text \"Pain Pros of Plano\" with \"Pane Pros of Plano\" across the site (including page copy, footer text, and the browser tab title).",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-login-page-that-lets-the-site-owner-sign-in-using-internet-identity-and-also-provides-a-logout-action",
+      "title": "Add an Admin Login page that lets the site owner sign in using Internet Identity and also provides a logout action.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-private-view-quotes-admin-page-that-lists-all-submitted-quote-requests-and-is-accessible-only-to-an-authenticated-admin-user",
+      "title": "Add a private \"View Quotes\" admin page that lists all submitted quote requests and is accessible only to an authenticated admin user.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-app-navigation-to-include-an-admin-entry-point-for-the-new-admin-functionality-without-exposing-quote-data-to-the-public",
+      "title": "Update the app navigation to include an admin entry point for the new admin functionality without exposing quote data to the public.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-user-facing-footer-attribution-that-indicates-the-site-was-built-with-ai-the-built-with-using-caffeine-ai-line-so-the-bottom-footer-of-the-website-no-longer-shows-any-made-with-ai-style-message-or-a-caffeine-ai-attribution-link",
+      "title": "Remove the user-facing footer attribution that indicates the site was built with AI (the \"Built with … using caffeine.ai\" line) so the bottom/footer of the website no longer shows any \"Made with AI\"-style message or a caffeine.ai attribution link.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-configure-publishing-deployment-so-the-public-site-url-does-not-include-the-caffeine-xyz-domain-publish-under-a-custom-domain-or-equivalent-non-caffeine-xyz-url-and-ensure-the-app-loads-correctly-when-accessed-via-that-custom-domain",
+      "title": "Configure publishing/deployment so the public site URL does not include the caffeine.xyz domain (publish under a custom domain or equivalent non-caffeine.xyz URL), and ensure the app loads correctly when accessed via that custom domain.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-maintenance-mode-is-enabled-block-all-public-pages-home-other-services-request-a-quote-by-showing-a-single-maintenance-screen-instead-of-the-normal-site-content-admin-access-admin-login-and-view-quotes-must-still-be-reachable-so-the-owner-can-turn-the-site-back-on",
+      "title": "When maintenance mode is enabled, block all public pages (Home, Other Services, Request a Quote) by showing a single maintenance screen instead of the normal site content; admin access (Admin Login and View Quotes) must still be reachable so the owner can turn the site back on.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-only-ui-control-that-allows-the-site-owner-to-enable-disable-maintenance-mode-from-within-the-app-using-internet-identity-admin-authentication-all-user-facing-text-must-be-in-english",
+      "title": "Add an admin-only UI control that allows the site owner to enable/disable maintenance mode from within the app (using Internet Identity admin authentication). All user-facing text must be in English.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enable-public-deployment-go-live-so-the-site-is-accessible-to-the-public-in-production-with-maintenance-mode-disabled-by-default",
+      "title": "Enable public deployment (“go live”) so the site is accessible to the public in production, with maintenance mode disabled by default.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-backend-api-and-frontend-admin-quotes-ui-to-reflect-the-new-quote-storage-structure-while-keeping-the-view-quotes-page-admin-only",
+      "title": "Update the backend API and frontend admin quotes UI to reflect the new quote storage structure while keeping the \"View Quotes\" page admin-only.",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a homepage for Pain Pros of Plano Window Washing that prominently displays the business phone number (214-284-1305).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add a quote request form collecting first name, last name, ZIP code, address, number of windows, and an optional note.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Update site content to list the company owner as Rylan Myers.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Display the business email address paneprosnplano@gmail.com on the website.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Send quote request submissions to paneprosnplano@gmail.com via email notification.",
+      "reqIds": [],
+      "status": "blocked"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Remove the Before/After photo area and replace it with an 'Other Jobs/Services We Do' section listing services like gutter cleaning, solar panel cleaning, power washing, leaf raking, and other small duties.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add a short description under each listed service in the 'Other Jobs/Services We Do' section to make it feel more complete.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Add images (business-provided photos) next to each listed service in the 'Other Jobs/Services We Do' section so each service has its corresponding picture.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add a business logo to the website (upload/bundle the logo asset and display it in the site UI, e.g., header/navigation and/or footer).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Update all site copy/branding text to use \"Pane Pros\" instead of \"Pain Pros\" (replace every occurrence).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add an admin login (e.g., Internet Identity) and a private \"View Quotes\" page so only the owner can view submitted quote requests.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Ensure the backend exposes the minimum necessary admin-auth state for the frontend to reliably determine whether the current caller is an admin, without weakening existing access control around quotes.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Remove/hide the “Made with AI” text from the bottom/footer of the website.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "When publishing, use a custom domain or otherwise remove \"caffeine.xyz\" from the public site URL.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Add a backend-controlled \"maintenance mode\" flag that can be read by anyone (public) and can be toggled only by an authenticated admin user.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Publish the site / go live (enable public deployment).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Finalize and validate custom-domain publishing so the public site is reachable from a non-caffeine.xyz URL, and document the exact steps/values needed to complete DNS + canister mapping using the existing frontend/CUSTOM_DOMAIN_DEPLOYMENT.md.",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Allow anyone (anonymous/public visitors) to submit a quote request without needing to log in, while keeping quote viewing/admin actions restricted to authenticated admin only.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Update the backend so any visitor (including anonymous users who are not logged in) can submit a quote request without receiving the error \"Unauthorized: Only users can submit quote requests\".",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Change backend quote storage so multiple public/anonymous quote submissions can be stored without overwriting each other (the current Map keyed by Principal would overwrite for anonymous callers).",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "If changing the backend quote storage modifies stable state shape, add a conditional backend state migration so existing stored quote requests (if any) remain accessible after upgrade.",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Pain Pros of Plano Window Washing",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,91 @@
+{
+  "kind": "build_request",
+  "title": "Allow public (anonymous) visitors to submit quote requests while keeping admin-only quote viewing",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-41",
+      "text": "Update the backend so any visitor (including anonymous users who are not logged in) can submit a quote request without receiving the error \"Unauthorized: Only users can submit quote requests\".",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "Can u make it so anyone can do a quote",
+          "Unauthorized: Only users can submit quote requests"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Calling backend.submitQuoteRequest as an anonymous principal succeeds (does not trap) and persists the quote request.",
+        "Existing admin-only protections remain in place for admin endpoints (e.g., getAllQuoteRequests remains admin-only)."
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "text": "Change backend quote storage so multiple public/anonymous quote submissions can be stored without overwriting each other (the current Map keyed by Principal would overwrite for anonymous callers).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "Can u make it so anyone can do a quote"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Submitting multiple quote requests from anonymous users results in multiple distinct stored entries (no overwrites).",
+        "Admin can retrieve and view all stored quote submissions in the admin quotes view."
+      ]
+    },
+    {
+      "id": "REQ-43",
+      "text": "Update the backend API and frontend admin quotes UI to reflect the new quote storage structure while keeping the \"View Quotes\" page admin-only.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "Can u make it so anyone can do a quote"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The frontend admin quotes query (useAdminQuotes) successfully loads the updated backend getAllQuoteRequests response.",
+        "The View Quotes table renders all entries without runtime/type errors and includes a stable row key per entry.",
+        "Non-admin visitors cannot access quote data: attempts to call the admin quotes endpoint still fail with an admin-only authorization error, and the UI remains protected by AdminAuthGate."
+      ]
+    },
+    {
+      "id": "REQ-44",
+      "text": "If changing the backend quote storage modifies stable state shape, add a conditional backend state migration so existing stored quote requests (if any) remain accessible after upgrade.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "Can u make it so anyone can do a quote"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After redeploy/upgrade, previously stored quote requests (submitted before this change) are still visible in the admin \"View Quotes\" page.",
+        "If no prior stable quote state exists, the migration is safely a no-op."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not modify files under frontend immutablePaths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "All user-facing text must be in English."
+  ],
+  "nonGoals": [
+    "Do not add third-party authentication providers; Internet Identity remains the only supported auth method for admin access.",
+    "Do not implement email sending for quote submissions (platform email capability is currently blocked).",
+    "Do not require public users to create accounts or log in to submit quotes."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

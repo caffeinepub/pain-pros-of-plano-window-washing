@@ -1,0 +1,25 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-backend-api-and-frontend-admin-quotes-ui-to-reflect-the-new-quote-storage-structure-while-keeping-the-view-quotes-page-admin-only",
+      "featureTitle": "Update the backend API and frontend admin quotes UI to reflect the new quote storage structure while keeping the \"View Quotes\" page admin-only.",
+      "files": [
+        "frontend/src/hooks/useAdminQuotes.ts",
+        "frontend/src/pages/ViewQuotesPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-43"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

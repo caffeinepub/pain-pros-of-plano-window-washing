@@ -1,0 +1,23 @@
+{
+  "frontend/src/index.css": "Global styles with teal/cyan OKLCH color system for window washing theme, custom typography, and utility classes for consistent spacing and animations.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom colors, border radius, shadows, and animations aligned with the window washing brand.",
+  "frontend/src/App.tsx": "Main application component with hardened maintenance mode gating that defaults to showing normal public content unless maintenance is explicitly confirmed as enabled, while keeping admin pages (adminLogin, viewQuotes) always accessible regardless of maintenance state.",
+  "frontend/src/components/SiteHeader.tsx": "Sticky header component with brand name, responsive navigation, and conditional admin link (Admin Login or View Quotes) that remains accessible regardless of maintenance mode state.",
+  "frontend/src/components/SiteFooter.tsx": "Footer component with company info displaying \"Pane Pros of Plano\" as the company name, expanded services list, service area, and copyright line without external attribution.",
+  "frontend/src/pages/HomePage.tsx": "Homepage featuring hero section with \"Pane Pros of Plano\" branding, service features with \"Why Choose Pane Pros?\" heading, and final CTA section with \"Pane Pros difference\" copy.",
+  "frontend/src/pages/QuoteRequestPage.tsx": "Quote request form with client-side validation for all required fields (name, ZIP, address, windows) and optional notes, displaying both phone number and email address paneprosnplano@gmail.com in the header, with success confirmation.",
+  "frontend/src/pages/BeforeAfterGalleryPage.tsx": "Responsive before/after gallery displaying exactly one window cleaning transformation with labeled images, a single Image Credits entry explicitly stating photos were provided by the business, and CTA section.",
+  "frontend/src/hooks/useQueries.ts": "React Query hook for submitting quote requests to the backend, automatically populating the createdBy field with the user's principal or \"anonymous\" for unauthenticated users, with proper error handling and cache invalidation.",
+  "frontend/public/assets/generated/windows-before-1.dim_1200x800.png": "Replaced with IMG_4984-1.jpeg showing a foggy/dirty window before cleaning.",
+  "frontend/public/assets/generated/windows-after-1.dim_1200x800.png": "Replaced with IMG_4983-1.jpeg showing a crystal-clear window after professional cleaning.",
+  "frontend/src/pages/OtherJobsPage.tsx": "Dedicated page displaying all additional services with \"Pane Pros of Plano\" branding in the header paragraph and \"No Job Too Small\" section.",
+  "frontend/index.html": "HTML entry point with favicon reference using relative path for robust asset resolution when served from custom domains.",
+  "frontend/src/pages/AdminLoginPage.tsx": "Admin login page using Internet Identity with sign-in/logout buttons, displaying signed-in principal, and clearing React Query cache on logout with correct loginError status handling.",
+  "frontend/src/pages/ViewQuotesPage.tsx": "Admin-only page displaying quote requests table with maintenance mode toggle control, showing the createdBy field with a badge for anonymous submissions and principal IDs for authenticated users, wrapped in AdminAuthGate for access control.",
+  "frontend/src/components/AdminAuthGate.tsx": "Reusable admin access control component that shows login prompt for unauthenticated users, access denied message for non-admins, and renders children only for authenticated admins.",
+  "frontend/src/hooks/useAdminAuth.ts": "React Query hook providing admin authentication state by checking Internet Identity and querying backend isAdmin() method.",
+  "frontend/src/hooks/useAdminQuotes.ts": "React Query hook for fetching all quote requests for admins, returning an array of QuoteRequest objects conditionally enabled based on admin authorization state.",
+  "frontend/CUSTOM_DOMAIN_DEPLOYMENT.md": "Complete end-to-end guide for deploying to a custom domain on the Internet Computer, including concrete DNS configuration steps for both subdomain and apex domain, domain registration with IC boundary nodes, troubleshooting for blank pages and broken assets, and a comprehensive production verification checklist.",
+  "frontend/src/hooks/useMaintenanceMode.ts": "React Query hooks for maintenance mode with improved production resilience including retry logic, placeholder data defaulting to false, and graceful fallback to ensure public pages load even on transient backend failures.",
+  "frontend/src/pages/MaintenancePage.tsx": "Dedicated maintenance screen displaying a construction message with phone contact info and an Admin Login button for admin access."
+}
